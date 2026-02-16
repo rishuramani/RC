@@ -1,170 +1,104 @@
-'use client';
-
+import type { Metadata } from 'next';
 import Link from 'next/link';
-import { useState } from 'react';
+import BlogNavbar from '../components/BlogNavbar';
+import BlogFooter from '../components/BlogFooter';
 
-export default function Blog() {
-  const [activeCategory, setActiveCategory] = useState('all');
+export const metadata: Metadata = {
+  title: 'Market Insights | RC Investment Properties',
+  description: 'Data-driven analysis of multifamily markets, investment trends, and operational strategies.',
+};
 
-  const blogPosts = [
-    {
-      id: 1,
-      title: 'Houston Multifamily Market 2025: Supply Stabilization & Continued Opportunity',
-      slug: 'houston-2025',
-      category: 'market-analysis',
-      date: 'January 15, 2025',
-      excerpt: 'The Houston multifamily market enters 2025 with a fundamentally different backdrop than the previous two years. After the supply inflection of 2023-2024, market conditions are stabilizing.',
-      readTime: '8 min read'
-    },
-    {
-      id: 2,
-      title: 'Houston Q4 2025 Market Update: The Normalization Continues',
-      slug: 'houston-q4-2025',
-      category: 'market-analysis',
-      date: 'October 20, 2024',
-      excerpt: 'As we head into Q4 2024, the Houston multifamily market continues its normalization trajectory. After extraordinary growth between 2020-2022, the market is settling into a more sustainable equilibrium.',
-      readTime: '6 min read'
-    }
-  ];
-
-  const filteredPosts = activeCategory === 'all' 
-    ? blogPosts 
-    : blogPosts.filter(post => post.category === activeCategory);
-
+export default function BlogPage() {
   return (
     <>
-      {/* Navigation */}
-      <nav className="navbar">
-        <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Link href="/" className="logo">RC Investment Properties</Link>
-          <ul className="nav-links" style={{ display: 'flex' }}>
-            <li><a href="/#about">About</a></li>
-            <li><a href="/#portfolio">Portfolio</a></li>
-            <li><a href="/#approach">Approach</a></li>
-            <li><Link href="/blog">Insights</Link></li>
-            <li><a href="/#contact" className="btn-nav">Contact</a></li>
-          </ul>
-        </div>
-      </nav>
+      <BlogNavbar />
 
       {/* Blog Hero */}
-      <section className="section blog-hero">
+      <header className="blog-hero">
         <div className="container">
-          <div className="section-header">
-            <p className="section-label">Insights & Analysis</p>
-            <h1>RC Market Insights</h1>
-            <p style={{ fontSize: '1.125rem', color: '#555', marginTop: '20px' }}>In-depth analysis of multifamily markets, investment trends, and opportunities.</p>
-          </div>
+          <h1>Market Insights</h1>
+          <p className="lead">Data-driven analysis of multifamily markets, investment trends, and operational strategies.</p>
         </div>
-      </section>
+      </header>
 
       {/* Blog Content */}
-      <section className="section">
-        <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 280px', gap: '40px' }}>
-            {/* Main Content */}
-            <div>
-              <div className="blog-grid">
-                {filteredPosts.map((post) => (
-                  <Link href={`/blog/${post.slug}`} key={post.id}>
-                    <article className="blog-card" style={{ textDecoration: 'none', color: 'inherit' }}>
-                      <div className="blog-card-header">
-                        <span className="blog-category">{post.category === 'market-analysis' ? 'Market Analysis' : 'Investment'}</span>
-                        <span className="blog-date">{post.date}</span>
-                      </div>
-                      <h3>{post.title}</h3>
-                      <p>{post.excerpt}</p>
-                      <div className="blog-footer">
-                        <span className="read-time">{post.readTime}</span>
-                        <span className="read-more">Read Article →</span>
-                      </div>
-                    </article>
-                  </Link>
-                ))}
-              </div>
-            </div>
+      <main className="container">
+        <div className="blog-grid">
+          <div className="blog-posts">
 
-            {/* Sidebar */}
-            <aside className="blog-sidebar">
-              <div className="sidebar-block">
-                <h4>Categories</h4>
-                <ul className="category-list">
-                  <li>
-                    <button 
-                      onClick={() => setActiveCategory('all')}
-                      style={{
-                        background: 'none',
-                        border: 'none',
-                        cursor: 'pointer',
-                        padding: '8px 0',
-                        color: activeCategory === 'all' ? '#0A4E44' : '#555',
-                        fontWeight: activeCategory === 'all' ? '600' : '400',
-                        fontSize: '15px'
-                      }}
-                    >
-                      All Articles
-                    </button>
-                  </li>
-                  <li>
-                    <button 
-                      onClick={() => setActiveCategory('market-analysis')}
-                      style={{
-                        background: 'none',
-                        border: 'none',
-                        cursor: 'pointer',
-                        padding: '8px 0',
-                        color: activeCategory === 'market-analysis' ? '#0A4E44' : '#555',
-                        fontWeight: activeCategory === 'market-analysis' ? '600' : '400',
-                        fontSize: '15px'
-                      }}
-                    >
-                      Market Analysis
-                    </button>
-                  </li>
-                </ul>
+            {/* Blog Post - Q4 2025 Market Update */}
+            <article className="blog-card">
+              <div className="blog-card-image">
+                <span className="placeholder">Q4 2025 Data</span>
               </div>
+              <div className="blog-card-content">
+                <div className="blog-meta">
+                  <span>January 2026</span>
+                  <span>Market Analysis</span>
+                </div>
+                <h2><Link href="/blog/houston-q4-2025">Houston Q4 2025: Strong Absorption and Slowing Supply Signal Market Inflection</Link></h2>
+                <p className="blog-excerpt">The latest Colliers data reveals a Houston multifamily market gaining momentum: occupancy up 200 basis points year-over-year to 90.4%, record annual absorption of 26,510 units, and a construction pipeline down 34%. The fundamentals are aligning for workforce housing investors.</p>
+                <Link href="/blog/houston-q4-2025" className="read-more">{`Read More \u2192`}</Link>
+              </div>
+            </article>
 
-              <div className="sidebar-block">
-                <h4>Contact Us</h4>
-                <p>Have questions about our market analysis?</p>
-                <a href="/#contact" className="btn btn-secondary">Get In Touch</a>
+            {/* Blog Post 1 */}
+            <article className="blog-card">
+              <div className="blog-card-image">
+                <span className="placeholder">Houston Market</span>
               </div>
-            </aside>
+              <div className="blog-card-content">
+                <div className="blog-meta">
+                  <span>January 2025</span>
+                  <span>Market Analysis</span>
+                </div>
+                <h2><Link href="/blog/houston-2025">Houston Multifamily: Why Workforce Housing Remains Resilient in 2025</Link></h2>
+                <p className="blog-excerpt">{"Despite broader economic uncertainty, Houston's workforce housing segment continues to demonstrate strong fundamentals. We examine the factors driving rental demand and why sub-institutional assets offer compelling risk-adjusted returns."}</p>
+                <Link href="/blog/houston-2025" className="read-more">{`Read More \u2192`}</Link>
+              </div>
+            </article>
+
           </div>
-        </div>
-      </section>
 
-      {/* Footer */}
-      <footer className="footer">
-        <div className="container">
-          <div className="footer-content">
-            <div className="footer-section">
-              <h4>RC Investment Properties</h4>
-              <p>Sub-institutional in size. Institutional in execution.</p>
-            </div>
-            <div className="footer-section">
-              <h4>Navigation</h4>
+          {/* Sidebar */}
+          <aside className="blog-sidebar">
+            <div className="sidebar-widget">
+              <h3>Categories</h3>
               <ul>
-                <li><a href="/#about">About</a></li>
-                <li><a href="/#portfolio">Portfolio</a></li>
-                <li><a href="/#approach">Approach</a></li>
-                <li><Link href="/blog">Insights</Link></li>
-                <li><a href="/#contact">Contact</a></li>
+                <li><Link href="/blog">Market Analysis</Link></li>
+                <li><Link href="/blog">Investment Strategy</Link></li>
+                <li><Link href="/blog">Operations</Link></li>
               </ul>
             </div>
-            <div className="footer-section">
-              <h4>Connect</h4>
+
+            <div className="sidebar-widget">
+              <h3>Markets</h3>
               <ul>
-                <li><a href="mailto:hello@rcinvestmentproperties.com">Email Us</a></li>
-                <li><a href="tel:+17135550123">Call Us</a></li>
+                <li><Link href="/blog">Houston, TX</Link></li>
+                <li><Link href="/blog">Phoenix, AZ</Link></li>
               </ul>
             </div>
-          </div>
-          <div className="footer-bottom">
-            <p>&copy; 2024 RC Investment Properties. All rights reserved.</p>
-          </div>
+
+            <div className="sidebar-widget">
+              <h3>Key Metrics</h3>
+              <ul>
+                <li><strong>Target IRR:</strong> 18-25%</li>
+                <li><strong>Equity Multiple:</strong> 2.0x+</li>
+                <li><strong>Cash Return:</strong> 7-9%</li>
+                <li><strong>Hold Period:</strong> 5-7 years</li>
+              </ul>
+            </div>
+
+            <div className="sidebar-widget" style={{ background: 'var(--rc-green)', color: 'var(--white)' }}>
+              <h3 style={{ color: 'var(--sage)', borderColor: 'var(--sage)' }}>Partner With Us</h3>
+              <p style={{ fontSize: '14px', color: 'var(--sage-light)', marginBottom: '20px' }}>Interested in co-investing in our next opportunity?</p>
+              <Link href="/#contact" className="btn btn-outline" style={{ color: 'var(--white)', borderColor: 'var(--white)', width: '100%', textAlign: 'center' }}>Get in Touch</Link>
+            </div>
+          </aside>
         </div>
-      </footer>
+      </main>
+
+      <BlogFooter />
     </>
   );
 }
