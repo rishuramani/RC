@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Houston Q4 2025: Strong Absorption and Slowing Supply Signal Market Inflection | RC Investment Properties</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart-container {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 24px;
+            margin: 32px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border: 1px solid var(--border);
+        }
+        .chart-container h4 {
+            color: var(--rc-green);
+            margin-bottom: 8px;
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.1rem;
+        }
+        .chart-wrapper {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+        .chart-source {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-top: 12px;
+            font-style: italic;
+        }
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin: 32px 0;
+        }
+
+        /* Filter Buttons */
+        .chart-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        .filter-btn {
+            padding: 6px 14px;
+            font-size: 13px;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 500;
+            border: 1px solid #E2E8F0;
+            background: #F7FAFC;
+            color: #4A5568;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .filter-btn:hover {
+            border-color: #8FB3A9;
+            background: #F0F7F5;
+        }
+        .filter-btn.active {
+            background: #0A4E44;
+            color: white;
+            border-color: #0A4E44;
+        }
+
+        @media (max-width: 768px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+            .chart-wrapper {
+                height: 250px;
+            }
+            .chart-filters {
+                gap: 6px;
+            }
+            .filter-btn {
+                padding: 5px 10px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">RC Investment Properties</a>
+            <ul class="nav-links">
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#portfolio">Portfolio</a></li>
+                <li><a href="index.html#approach">Approach</a></li>
+                <li><a href="blog.html">Insights</a></li>
+                <li><a href="index.html#contact" class="btn-nav">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Blog Post Hero -->
+    <header class="blog-post-hero">
+        <div class="container">
+            <div class="blog-meta">
+                <span>January 2026</span>
+                <span>Market Analysis</span>
+                <span>Houston, TX</span>
+            </div>
+            <h1>Houston Q4 2025: Strong Absorption and Slowing Supply Signal Market Inflection</h1>
+            <p class="lead">The latest data from Colliers reveals a Houston multifamily market gaining momentum: occupancy up 200 basis points year-over-year, record absorption, and a construction pipeline down 34%. For workforce housing investors, the fundamentals are aligning.</p>
+        </div>
+    </header>
+
+    <!-- Blog Post Content -->
+    <article class="blog-post-content">
+
+        <p>Houston's multifamily market closed 2025 on solid footing, with Q4 data confirming what we've observed on the ground: demand is absorbing supply, occupancy is recovering, and the construction pipeline is finally contracting. For investors focused on workforce housing, these trends reinforce our conviction in the market's near-term trajectory.</p>
+
+        <p>According to Colliers' Q4 2025 Houston Multifamily Report, the market absorbed 26,510 units during 2025, representing a 32.3% increase over 2024's 20,031-unit absorption and the highest annual total since 2021. This demand surge, combined with a meaningful pullback in new construction, is creating a more favorable supply-demand balance for existing properties.</p>
+
+        <h2>Key Market Metrics: Q4 2025</h2>
+
+        <p>The headline numbers tell a compelling story of market recovery:</p>
+
+        <div class="highlight-box">
+            <h4>Houston Multifamily Snapshot</h4>
+            <ul>
+                <li><strong>Overall Occupancy:</strong> 90.4% (up from 88.4% in Q4 2024)</li>
+                <li><strong>Annual Absorption:</strong> 26,510 units (highest since 2021)</li>
+                <li><strong>Under Construction:</strong> 9,087 units (down 34% year-over-year)</li>
+                <li><strong>Average Effective Rent:</strong> $1,258/month</li>
+                <li><strong>Total Inventory:</strong> 789,228 units</li>
+                <li><strong>Average Cap Rate:</strong> 5.9%</li>
+            </ul>
+        </div>
+
+        <!-- Rent & Occupancy Chart -->
+        <div class="chart-container">
+            <h4>Houston Rent & Occupancy Trends (2021-2025)</h4>
+            <div class="chart-filters" id="rentOccupancyFilters">
+                <button class="filter-btn active" data-filter="all">All Data</button>
+                <button class="filter-btn" data-filter="rent">Rent Only</button>
+                <button class="filter-btn" data-filter="occupancy">Occupancy Only</button>
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="rentOccupancyChart"></canvas>
+            </div>
+            <p class="chart-source">Source: Colliers, MRI Apartment Data</p>
+        </div>
+
+        <p>The 200-basis-point improvement in occupancy over the past year is particularly significant. After absorbing elevated deliveries throughout 2023 and 2024, the market has digested new supply and is now tightening. With construction starts having slowed dramatically over the past two years, the forward supply picture looks increasingly favorable.</p>
+
+        <h2>Class B and C Properties Lead Occupancy</h2>
+
+        <p>While Class A properties captured the largest share of quarterly absorption (60.8% of Q4's 3,749 units), workforce housing segments continue to demonstrate superior occupancy performance:</p>
+
+        <blockquote>
+            "Class B and C properties both maintain occupancy above 92%, outperforming the luxury segment by over 600 basis points. This spread underscores the structural demand advantage in workforce housing."
+        </blockquote>
+
+        <!-- Class Performance Chart -->
+        <div class="chart-container">
+            <h4>Occupancy & Rent by Property Class (Q4 2025)</h4>
+            <div class="chart-filters" id="classFilters">
+                <button class="filter-btn active" data-filter="all">All Data</button>
+                <button class="filter-btn" data-filter="occupancy">Occupancy Only</button>
+                <button class="filter-btn" data-filter="rent">Rent Only</button>
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="classPerformanceChart"></canvas>
+            </div>
+            <p class="chart-source">Source: Colliers, MRI Apartment Data</p>
+        </div>
+
+        <p><strong>Class A:</strong> 208,366 units at 86.1% occupancy with $1,704 average rent. Despite recording its lowest quarterly absorption in five years, Class A occupancy reached a record high, suggesting the segment is finally stabilizing after years of elevated supply.</p>
+
+        <p><strong>Class B:</strong> 302,311 units at 92.1% occupancy with $1,249 average rent. The largest segment by unit count, Class B properties represent the core of Houston's workforce housing stock and continue to demonstrate steady demand.</p>
+
+        <p><strong>Class C:</strong> 211,382 units at 92.5% occupancy with $982 average rent. This segment absorbed 1,023 units in Q4, representing 27.3% of quarterly absorption, maintaining consistent leasing momentum throughout the year.</p>
+
+        <p><strong>Class D:</strong> 67,169 units at 89.8% occupancy with $784 average rent. While smaller in scale, this segment also showed positive absorption and occupancy gains.</p>
+
+        <h2>Construction Pipeline Continues to Shrink</h2>
+
+        <p>Perhaps the most encouraging trend for existing property owners is the dramatic reduction in the construction pipeline. Units under construction totaled 9,087 in Q4 2025, down 34% from 13,769 units in Q4 2024.</p>
+
+        <!-- Submarket Activity Chart -->
+        <div class="chart-container">
+            <h4>Houston Multifamily Activity by Submarket (Q4 2025)</h4>
+            <div class="chart-filters" id="submarketFilters">
+                <button class="filter-btn active" data-filter="all">All Data</button>
+                <button class="filter-btn" data-filter="delivered">Delivered</button>
+                <button class="filter-btn" data-filter="absorption">Absorption</button>
+                <button class="filter-btn" data-filter="construction">Under Construction</button>
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="submarketChart"></canvas>
+            </div>
+            <p class="chart-source">Source: Colliers, MRI Apartment Data</p>
+        </div>
+
+        <p>This pullback reflects the challenging financing environment for new development, where elevated construction costs and higher interest rates have pushed many projects to the sidelines. For existing workforce housing assets, less new supply means reduced competitive pressure and improved pricing power over the coming years.</p>
+
+        <p>The Northwest submarket remains the most active area for development, leading in units delivered, absorbed, and under construction. However, even this historically high-growth corridor is seeing moderated construction activity compared to prior years.</p>
+
+        <h2>Investment Market: Pricing Reaches New Highs</h2>
+
+        <p>Houston's investment sales market showed continued recovery in Q4, with $1.1 billion in multifamily transactions. More notably, pricing metrics signal renewed investor confidence:</p>
+
+        <div class="highlight-box">
+            <h4>Investment Sales Highlights</h4>
+            <ul>
+                <li><strong>Average Price Per Unit:</strong> $173,079 (all-time high, up 19% YoY)</li>
+                <li><strong>Houston Cap Rate:</strong> 5.9% (vs. 5.8% for Texas and U.S. averages)</li>
+                <li><strong>Rolling 4-Quarter Volume:</strong> Up 9.2% year-over-year</li>
+                <li><strong>Bid-Ask Spread:</strong> Narrowing as sellers adjust expectations</li>
+            </ul>
+        </div>
+
+        <!-- Price Per Unit and Cap Rate Charts -->
+        <div class="charts-grid">
+            <div class="chart-container" style="margin: 0;">
+                <h4>Average Price Per Unit</h4>
+                <div class="chart-filters" id="priceFilters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="us">U.S.</button>
+                    <button class="filter-btn" data-filter="texas">Texas</button>
+                    <button class="filter-btn" data-filter="houston">Houston</button>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="pricePerUnitChart"></canvas>
+                </div>
+                <p class="chart-source">Source: Colliers, MSCI Real Capital Analytics</p>
+            </div>
+            <div class="chart-container" style="margin: 0;">
+                <h4>Average Cap Rate Comparison</h4>
+                <div class="chart-filters" id="capRateFilters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="us">U.S.</button>
+                    <button class="filter-btn" data-filter="texas">Texas</button>
+                    <button class="filter-btn" data-filter="houston">Houston</button>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="capRateChart"></canvas>
+                </div>
+                <p class="chart-source">Source: Colliers, MSCI Real Capital Analytics</p>
+            </div>
+        </div>
+
+        <p>The record-high average price per unit reflects both improved market fundamentals and the return of institutional capital to the market. Houston's slight cap rate premium relative to Texas and national averages continues to offer attractive relative value for investors seeking yield.</p>
+
+        <h2>What This Means for Workforce Housing Investors</h2>
+
+        <p>The Q4 2025 data reinforces several themes central to our investment thesis:</p>
+
+        <p><strong>Demand Durability.</strong> Houston's workforce housing segments continue to demonstrate resilient demand regardless of economic conditions. The 92%+ occupancy rates in Class B and C properties reflect the essential nature of this housing stock, serving workers in healthcare, education, logistics, and other core industries.</p>
+
+        <p><strong>Supply Discipline.</strong> The 34% year-over-year decline in construction activity suggests the development community has responded rationally to challenging economics. This supply discipline should support rent growth and occupancy in existing properties over the next 24-36 months.</p>
+
+        <p><strong>Pricing Opportunity.</strong> While average pricing has reached new highs, significant dispersion exists within the market. Properties with operational challenges, deferred maintenance, or motivated sellers can still be acquired at meaningful discounts to market averages, particularly in the sub-institutional size range where competition is limited.</p>
+
+        <p><strong>Basis Protection.</strong> At current replacement costs exceeding $200,000 per unit for new construction, acquiring existing workforce housing at $80,000-$120,000 per unit provides substantial basis protection and downside cushion.</p>
+
+        <h2>Looking Ahead to 2026</h2>
+
+        <p>We expect Houston's multifamily fundamentals to continue strengthening through 2026 as the market absorbs remaining lease-up inventory and the construction pipeline continues to contract. Key factors we're monitoring include:</p>
+
+        <p><strong>Interest Rate Trajectory.</strong> Further rate normalization would support both acquisition financing and exit valuations, though we're underwriting conservatively and not relying on rate relief for returns.</p>
+
+        <p><strong>Employment Growth.</strong> Houston's diversified economy continues to add jobs across energy, healthcare, technology, and logistics sectors. Sustained employment growth supports household formation and rental demand.</p>
+
+        <p><strong>Migration Patterns.</strong> Texas continues to benefit from domestic migration out of higher-cost states, with Houston capturing a meaningful share of new residents seeking affordability without sacrificing economic opportunity.</p>
+
+        <p>For disciplined investors focused on workforce housing, the current environment offers an attractive combination of improving fundamentals, favorable supply dynamics, and accessible entry points. The data suggests we may be approaching an inflection point where the market transitions from recovery to growth.</p>
+
+        <hr style="margin: 48px 0; border: none; border-top: 1px solid var(--border);">
+
+        <p><em>RC Investment Properties is actively acquiring workforce multifamily properties in Houston and Phoenix. To learn more about partnership opportunities, <a href="index.html#contact">contact us</a>.</em></p>
+
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo">RC Investment Properties</span>
+                    <p>Multifamily investment excellence in Houston and Phoenix.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="index.html#portfolio">Portfolio</a></li>
+                        <li><a href="index.html#approach">Approach</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="blog.html">Market Insights</a></li>
+                        <li><a href="index.html#approach">Investment Criteria</a></li>
+                        <li><a href="index.html#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 RC Investment Properties. All rights reserved.</p>
+                <p class="disclaimer">This website is for informational purposes only and does not constitute an offer to sell or a solicitation of an offer to buy any securities. Past performance is not indicative of future results.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Chart color scheme matching RC Investment Properties branding
+        const rcGreen = '#0A4E44';
+        const sage = '#8FB3A9';
+        const sageLight = '#B8D4CB';
+        const darkBlue = '#1a365d';
+        const textColor = '#2D3748';
+        const gridColor = '#E2E8F0';
+
+        // Chart.js default settings
+        Chart.defaults.font.family = "'Open Sans', sans-serif";
+        Chart.defaults.color = textColor;
+
+        // Store chart instances and their original data
+        const charts = {};
+        const chartData = {};
+
+        // Utility function to set up filter buttons
+        function setupFilters(filterContainerId, chartKey, filterConfig) {
+            const container = document.getElementById(filterContainerId);
+            const buttons = container.querySelectorAll('.filter-btn');
+
+            buttons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Update active state
+                    buttons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+
+                    // Get filter type
+                    const filter = this.dataset.filter;
+
+                    // Update chart visibility
+                    const chart = charts[chartKey];
+                    const originalData = chartData[chartKey];
+
+                    chart.data.datasets.forEach((dataset, index) => {
+                        if (filter === 'all') {
+                            dataset.hidden = false;
+                        } else {
+                            dataset.hidden = !filterConfig[filter].includes(index);
+                        }
+                    });
+
+                    chart.update();
+                });
+            });
+        }
+
+        // Labels for time series charts
+        const quarterLabels = ['Q1 21', 'Q2 21', 'Q3 21', 'Q4 21', 'Q1 22', 'Q2 22', 'Q3 22', 'Q4 22', 'Q1 23', 'Q2 23', 'Q3 23', 'Q4 23', 'Q1 24', 'Q2 24', 'Q3 24', 'Q4 24', 'Q1 25', 'Q2 25', 'Q3 25', 'Q4 25'];
+
+        // 1. Rent & Occupancy Chart
+        const rentOccupancyCtx = document.getElementById('rentOccupancyChart').getContext('2d');
+        charts.rentOccupancy = new Chart(rentOccupancyCtx, {
+            type: 'bar',
+            data: {
+                labels: quarterLabels,
+                datasets: [
+                    {
+                        label: 'Average Rent ($)',
+                        type: 'bar',
+                        data: [1050, 1080, 1120, 1160, 1200, 1240, 1280, 1310, 1320, 1310, 1300, 1290, 1285, 1280, 1275, 1277, 1265, 1268, 1273, 1258],
+                        backgroundColor: rcGreen,
+                        borderRadius: 4,
+                        yAxisID: 'y'
+                    },
+                    {
+                        label: 'Occupancy (%)',
+                        type: 'line',
+                        data: [90.5, 91.0, 91.2, 91.5, 91.2, 90.8, 90.2, 89.5, 89.0, 88.5, 88.2, 88.0, 87.8, 88.0, 88.2, 88.4, 89.0, 89.5, 90.1, 90.4],
+                        borderColor: sage,
+                        backgroundColor: sage,
+                        tension: 0.3,
+                        pointRadius: 3,
+                        pointBackgroundColor: sage,
+                        yAxisID: 'y1'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: { usePointStyle: true, padding: 20 }
+                    }
+                },
+                scales: {
+                    x: { grid: { display: false } },
+                    y: {
+                        type: 'linear',
+                        position: 'left',
+                        title: { display: true, text: 'Rent ($)' },
+                        min: 0,
+                        max: 1400,
+                        grid: { color: gridColor }
+                    },
+                    y1: {
+                        type: 'linear',
+                        position: 'right',
+                        title: { display: true, text: 'Occupancy (%)' },
+                        min: 86,
+                        max: 92,
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+        setupFilters('rentOccupancyFilters', 'rentOccupancy', {
+            'rent': [0],
+            'occupancy': [1]
+        });
+
+        // 2. Class Performance Chart
+        const classPerformanceCtx = document.getElementById('classPerformanceChart').getContext('2d');
+        charts.classPerformance = new Chart(classPerformanceCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Class A', 'Class B', 'Class C', 'Class D'],
+                datasets: [
+                    {
+                        label: 'Occupancy (%)',
+                        data: [86.1, 92.1, 92.5, 89.8],
+                        backgroundColor: rcGreen,
+                        borderRadius: 4,
+                        yAxisID: 'y'
+                    },
+                    {
+                        label: 'Monthly Rent ($)',
+                        data: [1704, 1249, 982, 784],
+                        backgroundColor: sage,
+                        borderRadius: 4,
+                        yAxisID: 'y1'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: { usePointStyle: true, padding: 20 }
+                    }
+                },
+                scales: {
+                    x: { grid: { display: false } },
+                    y: {
+                        type: 'linear',
+                        position: 'left',
+                        title: { display: true, text: 'Occupancy (%)' },
+                        min: 80,
+                        max: 95,
+                        grid: { color: gridColor }
+                    },
+                    y1: {
+                        type: 'linear',
+                        position: 'right',
+                        title: { display: true, text: 'Rent ($)' },
+                        min: 0,
+                        max: 2000,
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+        setupFilters('classFilters', 'classPerformance', {
+            'occupancy': [0],
+            'rent': [1]
+        });
+
+        // 3. Submarket Activity Chart
+        const submarketCtx = document.getElementById('submarketChart').getContext('2d');
+        charts.submarket = new Chart(submarketCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Central', 'Northeast', 'Northwest', 'Southeast', 'Southwest'],
+                datasets: [
+                    {
+                        label: 'Units Delivered',
+                        data: [0, 725, 1881, 389, 0],
+                        backgroundColor: darkBlue,
+                        borderRadius: 4
+                    },
+                    {
+                        label: 'Net Absorption',
+                        data: [1, 987, 1184, 977, 862],
+                        backgroundColor: rcGreen,
+                        borderRadius: 4
+                    },
+                    {
+                        label: 'Under Construction',
+                        data: [1345, 0, 3017, 2292, 1446],
+                        backgroundColor: sageLight,
+                        borderRadius: 4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: { usePointStyle: true, padding: 20 }
+                    }
+                },
+                scales: {
+                    x: { grid: { display: false } },
+                    y: {
+                        title: { display: true, text: '# of Units' },
+                        grid: { color: gridColor }
+                    }
+                }
+            }
+        });
+        setupFilters('submarketFilters', 'submarket', {
+            'delivered': [0],
+            'absorption': [1],
+            'construction': [2]
+        });
+
+        // 4. Price Per Unit Chart
+        const pricePerUnitCtx = document.getElementById('pricePerUnitChart').getContext('2d');
+        charts.pricePerUnit = new Chart(pricePerUnitCtx, {
+            type: 'line',
+            data: {
+                labels: quarterLabels,
+                datasets: [
+                    {
+                        label: 'U.S.',
+                        data: [165000, 175000, 190000, 210000, 225000, 235000, 240000, 230000, 220000, 210000, 205000, 200000, 195000, 198000, 205000, 210000, 212000, 215000, 218000, 220752],
+                        borderColor: '#718096',
+                        backgroundColor: 'transparent',
+                        tension: 0.3,
+                        pointRadius: 2
+                    },
+                    {
+                        label: 'Texas',
+                        data: [130000, 140000, 155000, 170000, 180000, 188000, 192000, 185000, 175000, 168000, 165000, 162000, 160000, 163000, 168000, 170000, 171000, 172000, 174000, 174260],
+                        borderColor: sage,
+                        backgroundColor: 'transparent',
+                        tension: 0.3,
+                        pointRadius: 2
+                    },
+                    {
+                        label: 'Houston',
+                        data: [115000, 125000, 140000, 155000, 165000, 172000, 175000, 168000, 158000, 150000, 148000, 145000, 143000, 148000, 155000, 145500, 155000, 162000, 167000, 173079],
+                        borderColor: rcGreen,
+                        backgroundColor: 'transparent',
+                        tension: 0.3,
+                        pointRadius: 2,
+                        borderWidth: 3
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: { usePointStyle: true, padding: 15 }
+                    }
+                },
+                scales: {
+                    x: { grid: { display: false } },
+                    y: {
+                        title: { display: true, text: 'Price ($)' },
+                        grid: { color: gridColor },
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + (value / 1000) + 'K';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        setupFilters('priceFilters', 'pricePerUnit', {
+            'us': [0],
+            'texas': [1],
+            'houston': [2]
+        });
+
+        // 5. Cap Rate Chart
+        const capRateCtx = document.getElementById('capRateChart').getContext('2d');
+        charts.capRate = new Chart(capRateCtx, {
+            type: 'line',
+            data: {
+                labels: quarterLabels,
+                datasets: [
+                    {
+                        label: 'U.S.',
+                        data: [4.8, 4.6, 4.5, 4.3, 4.2, 4.2, 4.3, 4.5, 4.8, 5.1, 5.3, 5.5, 5.6, 5.7, 5.8, 5.8, 5.8, 5.8, 5.8, 5.8],
+                        borderColor: '#718096',
+                        backgroundColor: 'transparent',
+                        tension: 0.3,
+                        pointRadius: 2
+                    },
+                    {
+                        label: 'Texas',
+                        data: [4.9, 4.7, 4.5, 4.4, 4.3, 4.3, 4.4, 4.6, 4.9, 5.2, 5.4, 5.5, 5.6, 5.7, 5.8, 5.8, 5.8, 5.8, 5.8, 5.8],
+                        borderColor: sage,
+                        backgroundColor: 'transparent',
+                        tension: 0.3,
+                        pointRadius: 2
+                    },
+                    {
+                        label: 'Houston',
+                        data: [5.0, 4.8, 4.6, 4.5, 4.4, 4.4, 4.5, 4.7, 5.0, 5.3, 5.5, 5.6, 5.7, 5.8, 5.8, 5.8, 5.8, 5.8, 5.8, 5.9],
+                        borderColor: rcGreen,
+                        backgroundColor: 'transparent',
+                        tension: 0.3,
+                        pointRadius: 2,
+                        borderWidth: 3
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: { usePointStyle: true, padding: 15 }
+                    }
+                },
+                scales: {
+                    x: { grid: { display: false } },
+                    y: {
+                        title: { display: true, text: 'Cap Rate (%)' },
+                        min: 4.0,
+                        max: 6.0,
+                        grid: { color: gridColor },
+                        ticks: {
+                            callback: function(value) {
+                                return value.toFixed(1) + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        setupFilters('capRateFilters', 'capRate', {
+            'us': [0],
+            'texas': [1],
+            'houston': [2]
+        });
+    </script>
+</body>
+</html>
