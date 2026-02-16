@@ -108,17 +108,79 @@ export default function ClientScripts() {
     });
   }, []);
 
+  const handlePortfolioHover = useCallback(() => {
+    document.querySelectorAll('.portfolio-card').forEach((card) => {
+      const el = card as HTMLElement;
+      el.addEventListener('mouseenter', function () {
+        this.style.transform = 'translateY(-4px)';
+      });
+      el.addEventListener('mouseleave', function () {
+        this.style.transform = 'translateY(0)';
+      });
+    });
+  }, []);
+
+  const handleThesisHover = useCallback(() => {
+    document.querySelectorAll('.thesis-card').forEach((card) => {
+      const el = card as HTMLElement;
+      el.addEventListener('mouseenter', function () {
+        this.style.boxShadow = '0 8px 24px rgba(0,0,0,0.12)';
+      });
+      el.addEventListener('mouseleave', function () {
+        this.style.boxShadow = '0 2px 4px rgba(0,0,0,0.05)';
+      });
+    });
+  }, []);
+
+  const handleCounterAnimation = useCallback(() => {
+    function animateCounter(element: HTMLElement, target: number, duration = 2000) {
+      const increment = target / (duration / 16);
+      let current = 0;
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          element.textContent = String(target);
+          clearInterval(timer);
+        } else {
+          element.textContent = String(Math.floor(current));
+        }
+      }, 16);
+    }
+
+    const counterObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const target = parseInt((entry.target as HTMLElement).dataset.target || '0');
+            if (target) {
+              animateCounter(entry.target as HTMLElement, target);
+            }
+            counterObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    document.querySelectorAll('[data-counter]').forEach((counter) => {
+      counterObserver.observe(counter);
+    });
+  }, []);
+
   useEffect(() => {
     handleMobileMenu();
     handleSmoothScroll();
     const cleanupNavbar = handleNavbarScroll();
     handleContactForm();
     handleScrollAnimations();
+    handlePortfolioHover();
+    handleThesisHover();
+    handleCounterAnimation();
 
     return () => {
       cleanupNavbar?.();
     };
-  }, [handleMobileMenu, handleSmoothScroll, handleNavbarScroll, handleContactForm, handleScrollAnimations]);
+  }, [handleMobileMenu, handleSmoothScroll, handleNavbarScroll, handleContactForm, handleScrollAnimations, handlePortfolioHover, handleThesisHover, handleCounterAnimation]);
 
   return null;
 }
