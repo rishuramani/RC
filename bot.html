@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketing Bot | RC Investment Properties</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">RC Investment Properties</a>
+            <ul class="nav-links">
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#portfolio">Portfolio</a></li>
+                <li><a href="index.html#approach">Approach</a></li>
+                <li><a href="blog.html">Insights</a></li>
+                <li><a href="index.html#contact" class="btn-nav">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Bot Sub-Nav -->
+    <nav class="bot-nav">
+        <div class="container">
+            <button class="bot-nav-link active" data-view="dashboard">Dashboard</button>
+            <button class="bot-nav-link" data-view="calendar">Calendar</button>
+            <button class="bot-nav-link" data-view="generate">Generate</button>
+            <button class="bot-nav-link" data-view="review">Review Queue</button>
+            <a href="bot-knowledge.html" class="bot-nav-link" style="text-decoration:none;">Knowledge Base</a>
+        </div>
+    </nav>
+
+    <main class="bot-page">
+        <div class="container">
+
+            <!-- ═══════════════ DASHBOARD VIEW ═══════════════ -->
+            <div class="bot-view active" id="view-dashboard">
+                <div class="bot-page-header">
+                    <h1>Marketing Dashboard</h1>
+                    <p>Overview of content pipeline, upcoming calendar, and recent activity.</p>
+                </div>
+
+                <div class="bot-stats" id="dash-stats"></div>
+
+                <div class="bot-grid-2">
+                    <div class="bot-card">
+                        <h3>Recent Activity</h3>
+                        <ul class="bot-activity-list" id="dash-activity"></ul>
+                    </div>
+                    <div class="bot-card">
+                        <h3>Upcoming Calendar</h3>
+                        <table class="bot-table" id="dash-calendar">
+                            <thead><tr><th>Date</th><th>Topic</th><th>Type</th></tr></thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════ CALENDAR VIEW ═══════════════ -->
+            <div class="bot-view" id="view-calendar">
+                <div class="bot-page-header">
+                    <h1>Content Calendar</h1>
+                    <p>Plan and schedule content across all platforms.</p>
+                </div>
+
+                <!-- Add Entry Form -->
+                <div class="bot-card">
+                    <h3>Add Calendar Entry</h3>
+                    <form class="bot-form" id="calendar-form">
+                        <div class="bot-form-row">
+                            <div class="form-group">
+                                <label for="cal-date">Date</label>
+                                <input type="date" id="cal-date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cal-type">Content Type</label>
+                                <select id="cal-type" required>
+                                    <option value="blog_post">Blog Post</option>
+                                    <option value="linkedin_post">LinkedIn Post</option>
+                                    <option value="market_report">Market Report</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="bot-form-row">
+                            <div class="form-group">
+                                <label for="cal-topic">Topic</label>
+                                <input type="text" id="cal-topic" placeholder="e.g. Houston Q1 2026 Market Update" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cal-principal">Principal</label>
+                                <select id="cal-principal" required>
+                                    <option value="Michael Rosen">Michael Rosen</option>
+                                    <option value="Bradley Couch">Bradley Couch</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="cal-notes">Notes</label>
+                            <textarea id="cal-notes" rows="2" placeholder="Key points, data sources, tone guidance..."></textarea>
+                        </div>
+                        <div>
+                            <button type="submit" class="bot-btn bot-btn-primary">Add Entry</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Calendar Table -->
+                <div class="bot-card">
+                    <h3>Scheduled Content</h3>
+                    <table class="bot-table" id="calendar-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Type</th>
+                                <th>Topic</th>
+                                <th>Principal</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ═══════════════ GENERATE VIEW ═══════════════ -->
+            <div class="bot-view" id="view-generate">
+                <div class="bot-page-header">
+                    <h1>Generate Content</h1>
+                    <p>Create new marketing content using firm data, market metrics, and brand guidelines.</p>
+                </div>
+
+                <!-- Generate Form -->
+                <div class="bot-card" id="generate-form-card">
+                    <h3>Content Parameters</h3>
+                    <form class="bot-form" id="generate-form">
+                        <div class="bot-form-row">
+                            <div class="form-group">
+                                <label for="gen-type">Content Type</label>
+                                <select id="gen-type" required>
+                                    <option value="blog_post">Blog Post</option>
+                                    <option value="linkedin_post">LinkedIn Post</option>
+                                    <option value="market_report">Market Report</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="gen-platform">Platform</label>
+                                <select id="gen-platform" required>
+                                    <option value="website">Website</option>
+                                    <option value="linkedin">LinkedIn</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="gen-topic">Topic</label>
+                            <input type="text" id="gen-topic" placeholder="e.g. Houston workforce housing fundamentals" required>
+                        </div>
+                        <div class="bot-form-row">
+                            <div class="form-group">
+                                <label for="gen-principal">Principal / Author</label>
+                                <select id="gen-principal" required>
+                                    <option value="Michael Rosen">Michael Rosen</option>
+                                    <option value="Bradley Couch">Bradley Couch</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="gen-instructions">Additional Instructions</label>
+                                <input type="text" id="gen-instructions" placeholder="Optional: specific data points, tone, etc.">
+                            </div>
+                        </div>
+                        <div>
+                            <button type="submit" class="bot-btn bot-btn-primary">Generate Content</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Loading -->
+                <div class="bot-loading" id="generate-loading" style="display:none;">
+                    <div class="bot-loading-spinner"></div>
+                    <p>Generating content using firm data and market metrics...</p>
+                    <p style="font-size:12px; margin-top:8px; color:var(--sage);">Applying brand guidelines and compliance checks...</p>
+                </div>
+
+                <!-- Result Preview -->
+                <div class="bot-card" id="generate-result" style="display:none;">
+                    <h3>Generated Content</h3>
+                    <div id="generate-result-meta" style="margin-bottom:16px;"></div>
+                    <div class="bot-detail-body" id="generate-result-body"></div>
+                    <div style="margin-top:20px;" id="generate-result-compliance"></div>
+                    <div class="bot-btn-group" style="margin-top:20px;">
+                        <button class="bot-btn bot-btn-primary" id="btn-send-to-queue">Send to Review Queue</button>
+                        <button class="bot-btn bot-btn-outline" id="btn-regenerate">Regenerate</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════ REVIEW QUEUE VIEW ═══════════════ -->
+            <div class="bot-view" id="view-review">
+                <div class="bot-page-header">
+                    <h1>Review Queue</h1>
+                    <p>Content awaiting review, approval, or publication.</p>
+                </div>
+
+                <div class="bot-card">
+                    <h3>Content Items</h3>
+                    <table class="bot-table" id="review-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Type</th>
+                                <th>Platform</th>
+                                <th>Status</th>
+                                <th>Compliance</th>
+                                <th>Author</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ═══════════════ CONTENT DETAIL VIEW ═══════════════ -->
+            <div class="bot-view" id="view-detail">
+                <button class="bot-back" id="btn-back-to-review">&larr; Back to Review Queue</button>
+
+                <div class="bot-detail-grid">
+                    <div>
+                        <div class="bot-page-header">
+                            <h1 id="detail-title"></h1>
+                        </div>
+                        <div class="bot-detail-body" id="detail-body"></div>
+                    </div>
+                    <div class="bot-detail-sidebar">
+                        <div class="bot-card">
+                            <h3>Metadata</h3>
+                            <ul class="bot-meta-list" id="detail-meta"></ul>
+                        </div>
+                        <div class="bot-card">
+                            <h3>Compliance Check</h3>
+                            <div id="detail-compliance"></div>
+                        </div>
+                        <div class="bot-card">
+                            <h3>Actions</h3>
+                            <div class="bot-btn-group" id="detail-actions" style="flex-direction:column;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Edit Calendar Entry Modal -->
+    <div class="bot-modal-overlay" id="modal-edit-calendar">
+        <div class="bot-modal">
+            <h3>Edit Calendar Entry</h3>
+            <form class="bot-form" id="edit-calendar-form">
+                <input type="hidden" id="edit-cal-id">
+                <div class="bot-form-row">
+                    <div class="form-group">
+                        <label for="edit-cal-date">Date</label>
+                        <input type="date" id="edit-cal-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-cal-type">Content Type</label>
+                        <select id="edit-cal-type" required>
+                            <option value="blog_post">Blog Post</option>
+                            <option value="linkedin_post">LinkedIn Post</option>
+                            <option value="market_report">Market Report</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="bot-form-row">
+                    <div class="form-group">
+                        <label for="edit-cal-topic">Topic</label>
+                        <input type="text" id="edit-cal-topic" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-cal-principal">Principal</label>
+                        <select id="edit-cal-principal" required>
+                            <option value="Michael Rosen">Michael Rosen</option>
+                            <option value="Bradley Couch">Bradley Couch</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="edit-cal-notes">Notes</label>
+                    <textarea id="edit-cal-notes" rows="2"></textarea>
+                </div>
+                <div class="bot-modal-actions">
+                    <button type="button" class="bot-btn bot-btn-outline" id="btn-cancel-edit">Cancel</button>
+                    <button type="submit" class="bot-btn bot-btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Content Body Modal -->
+    <div class="bot-modal-overlay" id="modal-edit-content">
+        <div class="bot-modal">
+            <h3>Edit Content</h3>
+            <form class="bot-form" id="edit-content-form">
+                <input type="hidden" id="edit-content-id">
+                <div class="form-group">
+                    <label for="edit-content-title">Title</label>
+                    <input type="text" id="edit-content-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-content-body">Body</label>
+                    <textarea id="edit-content-body" rows="12" required></textarea>
+                </div>
+                <div class="bot-modal-actions">
+                    <button type="button" class="bot-btn bot-btn-outline" id="btn-cancel-edit-content">Cancel</button>
+                    <button type="submit" class="bot-btn bot-btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="bot-toast" id="bot-toast"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo">RC Investment Properties</span>
+                    <p>Multifamily investment excellence in Houston and Phoenix.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="index.html#portfolio">Portfolio</a></li>
+                        <li><a href="index.html#approach">Approach</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="blog.html">Market Insights</a></li>
+                        <li><a href="index.html#approach">Investment Criteria</a></li>
+                        <li><a href="index.html#contact">Contact Us</a></li>
+                        <li><a href="bot.html">Marketing Bot</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 RC Investment Properties. All rights reserved.</p>
+                <p class="disclaimer">This website is for informational purposes only and does not constitute an offer to sell or a solicitation of an offer to buy any securities. Past performance is not indicative of future results.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/bot-data.js"></script>
+    <script src="js/bot-app.js"></script>
+</body>
+</html>

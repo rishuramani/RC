@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knowledge Base | RC Marketing Bot</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">RC Investment Properties</a>
+            <ul class="nav-links">
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#portfolio">Portfolio</a></li>
+                <li><a href="index.html#approach">Approach</a></li>
+                <li><a href="blog.html">Insights</a></li>
+                <li><a href="index.html#contact" class="btn-nav">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="bot-page">
+        <div class="container">
+            <div class="bot-page-header">
+                <p><a href="bot.html">&larr; Back to Marketing Bot</a></p>
+                <h1>Knowledge Base</h1>
+                <p>Read-only reference of firm facts, market data, data sources, and brand guidelines used for content generation.</p>
+            </div>
+
+            <!-- KB Tabs -->
+            <div class="bot-kb-tabs">
+                <button class="bot-kb-tab active" data-tab="firm-facts">Firm Facts</button>
+                <button class="bot-kb-tab" data-tab="market-data">Market Data</button>
+                <button class="bot-kb-tab" data-tab="data-sources">Data Sources</button>
+                <button class="bot-kb-tab" data-tab="brand-rules">Brand Rules</button>
+            </div>
+
+            <!-- Firm Facts Panel -->
+            <div class="bot-kb-panel active" id="panel-firm-facts">
+                <div id="kb-firm-facts"></div>
+            </div>
+
+            <!-- Market Data Panel -->
+            <div class="bot-kb-panel" id="panel-market-data">
+                <div id="kb-market-data"></div>
+            </div>
+
+            <!-- Data Sources Panel -->
+            <div class="bot-kb-panel" id="panel-data-sources">
+                <div id="kb-data-sources"></div>
+            </div>
+
+            <!-- Brand Rules Panel -->
+            <div class="bot-kb-panel" id="panel-brand-rules">
+                <div id="kb-brand-rules"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo">RC Investment Properties</span>
+                    <p>Multifamily investment excellence in Houston and Phoenix.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="index.html#portfolio">Portfolio</a></li>
+                        <li><a href="index.html#approach">Approach</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="blog.html">Market Insights</a></li>
+                        <li><a href="index.html#approach">Investment Criteria</a></li>
+                        <li><a href="index.html#contact">Contact Us</a></li>
+                        <li><a href="bot.html">Marketing Bot</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 RC Investment Properties. All rights reserved.</p>
+                <p class="disclaimer">This website is for informational purposes only and does not constitute an offer to sell or a solicitation of an offer to buy any securities. Past performance is not indicative of future results.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/bot-data.js"></script>
+    <script src="js/bot-knowledge.js"></script>
+</body>
+</html>
