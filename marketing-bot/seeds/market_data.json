@@ -1,0 +1,64 @@
+{
+  "houston": {
+    "Q4 2025": {
+      "occupancy": {"value": "90.4%", "source": "CoStar"},
+      "absorption": {"value": "26,510 units", "source": "CoStar"},
+      "supply_pipeline": {"value": "9,087 units under construction", "source": "CoStar"},
+      "rent_growth_projected": {"value": "2.1% annualized", "source": "CoStar"},
+      "avg_effective_rent": {"value": "$1,277/month", "source": "CoStar"}
+    },
+    "2024": {
+      "population_growth": {"value": "~200,000 residents added", "source": "U.S. Census Bureau"},
+      "net_migration_share": {"value": "75% of growth from migration", "source": "U.S. Census Bureau"},
+      "net_migration_rank": {"value": "#1 net migration among U.S. metros", "source": "U.S. Census Bureau"},
+      "jobs_added": {"value": "57,800 new jobs", "source": "BLS"},
+      "avg_effective_rent": {"value": "$1,277/month", "source": "CoStar"},
+      "metro_occupancy": {"value": "89.0%", "source": "CoStar"},
+      "occupancy_rank": {"value": "#1 among Texas markets", "source": "CoStar"}
+    }
+  },
+  "phoenix": {
+    "2025": {
+      "portfolio_units": {"value": "15 units", "source": "Internal"},
+      "property": {"value": "Arcadia Lite - 3406 N 38th St", "source": "Internal"}
+    }
+  },
+  "data_sources": [
+    {
+      "name": "BLS Employment Release",
+      "url": "https://www.bls.gov/news.release/empsit.nr0.htm",
+      "frequency": "monthly",
+      "notes": "National and metro-level employment data"
+    },
+    {
+      "name": "CoStar Houston Multifamily Report",
+      "url": null,
+      "frequency": "quarterly",
+      "notes": "Subscription-based. Key metrics: occupancy, absorption, rent growth, supply pipeline"
+    },
+    {
+      "name": "U.S. Census Bureau Population Estimates",
+      "url": "https://www.census.gov/programs-surveys/popest.html",
+      "frequency": "annual",
+      "notes": "Metro-level population and migration estimates"
+    },
+    {
+      "name": "Texas Workforce Commission",
+      "url": "https://www.twc.texas.gov",
+      "frequency": "monthly",
+      "notes": "Texas-specific employment and labor market data"
+    },
+    {
+      "name": "Greater Houston Partnership",
+      "url": "https://www.houston.org",
+      "frequency": "monthly",
+      "notes": "Houston economic development updates and reports"
+    },
+    {
+      "name": "Federal Reserve Interest Rate Decisions",
+      "url": "https://www.federalreserve.gov",
+      "frequency": "8x per year",
+      "notes": "FOMC meetings and rate decisions impacting cap rates and financing"
+    }
+  ]
+}

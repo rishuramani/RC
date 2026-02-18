@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Review Queue — RC Marketing Bot{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Review Queue</h1>
+    <span class="badge bg-primary fs-6">{{ items|length }} pending</span>
+</div>
+
+{% if items %}
+<div class="table-responsive">
+    <table class="table table-hover align-middle">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Type</th>
+                <th>Platform</th>
+                <th>Principal</th>
+                <th>Status</th>
+                <th>Compliant</th>
+                <th>Preview</th>
+                <th>Created</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr class="cursor-pointer" onclick="window.location='{{ url_for('content_detail', content_id=item.content.id) }}'">
+                <td><strong>#{{ item.content.id }}</strong></td>
+                <td>{{ item.content.content_type }}</td>
+                <td><span class="badge bg-secondary">{{ item.content.platform }}</span></td>
+                <td>{{ item.content.principal or 'company' }}</td>
+                <td>
+                    {% if item.content.status == 'queued' %}
+                    <span class="badge bg-warning text-dark">Queued</span>
+                    {% else %}
+                    <span class="badge bg-info">Draft</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if item.is_compliant %}
+                    <span class="text-success">&#10003;</span>
+                    {% else %}
+                    <span class="text-danger">&#10007;</span>
+                    {% endif %}
+                </td>
+                <td class="text-truncate" style="max-width: 300px;">{{ item.content.body[:100] }}...</td>
+                <td><small class="text-muted">{{ item.content.created_at }}</small></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="text-center py-5">
+    <p class="text-muted fs-5">Review queue is empty.</p>
+    <p class="text-muted">Generate content using the CLI to see items here.</p>
+</div>
+{% endif %}
+{% endblock %}

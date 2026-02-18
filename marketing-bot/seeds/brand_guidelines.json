@@ -1,0 +1,83 @@
+{
+  "terminology": [
+    {
+      "rule": "Use 'workforce housing' instead of 'affordable housing'",
+      "example": "Houston's workforce housing segment continues to show resilience"
+    },
+    {
+      "rule": "Use 'value creation' instead of 'flipping' or 'fixing up'",
+      "example": "Our value creation strategy focuses on operational improvements"
+    },
+    {
+      "rule": "Use 'Sunbelt thesis' when discussing geographic strategy",
+      "example": "Our Sunbelt thesis targets markets with favorable population and employment trends"
+    },
+    {
+      "rule": "Use 'sub-institutional advantage' for market positioning",
+      "example": "The sub-institutional advantage allows us to source deals institutions overlook"
+    },
+    {
+      "rule": "Use 'durable cash flow' for income reliability",
+      "example": "Durable cash flow from workforce housing reduces exit reliance"
+    },
+    {
+      "rule": "Use 'repositioning' for property improvement strategy",
+      "example": "Our repositioning playbook targets interior upgrades and operational improvements"
+    },
+    {
+      "rule": "Use 'basis' when discussing acquisition price relative to replacement cost",
+      "example": "Our low basis position provides meaningful downside protection"
+    }
+  ],
+  "tone": [
+    {
+      "rule": "Professional, analytical, and data-driven",
+      "example": "Houston occupancy reached 90.4% in Q4 2025, supported by 26,510 units of absorption"
+    },
+    {
+      "rule": "Confident but never aggressive or boastful",
+      "example": "The fundamentals support our thesis — not 'We're the best in the business'"
+    },
+    {
+      "rule": "Educational rather than promotional",
+      "example": "Share market insights, not sales pitches"
+    },
+    {
+      "rule": "Focus on downside protection and discipline",
+      "example": "Our conservative leverage approach limits downside exposure"
+    }
+  ],
+  "compliance": [
+    {
+      "rule": "Never guarantee returns or imply guaranteed outcomes",
+      "example": "Target IRR of 18-25% (not 'guaranteed 18-25% returns')"
+    },
+    {
+      "rule": "Include past performance disclaimer when referencing track record",
+      "example": "Past performance is not indicative of future results."
+    },
+    {
+      "rule": "Market analysis should note 'For informational purposes only'",
+      "example": "For informational purposes only. This does not constitute investment advice."
+    },
+    {
+      "rule": "No specific investment solicitation in public social media content"
+    },
+    {
+      "rule": "No discussion of specific fund terms or current offerings on social media"
+    },
+    {
+      "rule": "Do not disclose investor names or specific LP information"
+    }
+  ],
+  "avoid": [
+    {"rule": "Do not use 'affordable housing'"},
+    {"rule": "Do not use 'flipping' or 'flip'"},
+    {"rule": "Do not use 'guaranteed' or 'guaranteed returns'"},
+    {"rule": "Do not use 'risk-free' or 'risk free'"},
+    {"rule": "Do not use 'get rich'"},
+    {"rule": "Do not use 'wealth building'"},
+    {"rule": "Do not use 'passive income' (use 'cash flow' or 'distributions')"},
+    {"rule": "Do not use 'deal of a lifetime' or hyperbolic language"}
+  ]
+}

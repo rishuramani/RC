@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% block title %}Content #{{ content.id }} — RC Marketing Bot{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h1 class="mb-3">Content #{{ content.id }}</h1>
+        {% if content.title %}
+        <h4 class="text-muted mb-3">{{ content.title }}</h4>
+        {% endif %}
+
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body">
+                <div class="content-body" style="white-space: pre-wrap;">{{ content.body }}</div>
+            </div>
+        </div>
+
+        {% if content.status in ['draft', 'queued'] %}
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header bg-white">
+                <h5 class="mb-0">Edit Content</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('edit_content', content_id=content.id) }}">
+                    <textarea name="body" class="form-control mb-3" rows="10">{{ content.body }}</textarea>
+                    <button type="submit" class="btn btn-secondary">Save & Requeue</button>
+                </form>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header bg-white">
+                <h5 class="mb-0">Metadata</h5>
+            </div>
+            <div class="card-body">
+                <dl>
+                    <dt>Type</dt>
+                    <dd>{{ content.content_type }}</dd>
+                    <dt>Platform</dt>
+                    <dd><span class="badge bg-secondary">{{ content.platform }}</span></dd>
+                    <dt>Principal</dt>
+                    <dd>{{ content.principal or 'Company' }}</dd>
+                    <dt>Topic</dt>
+                    <dd>{{ content.topic or '—' }}</dd>
+                    <dt>Status</dt>
+                    <dd>
+                        {% if content.status == 'queued' %}
+                        <span class="badge bg-warning text-dark">Queued</span>
+                        {% elif content.status == 'draft' %}
+                        <span class="badge bg-info">Draft</span>
+                        {% elif content.status == 'approved' %}
+                        <span class="badge bg-success">Approved</span>
+                        {% elif content.status == 'published' %}
+                        <span class="badge bg-primary">Published</span>
+                        {% elif content.status == 'rejected' %}
+                        <span class="badge bg-danger">Rejected</span>
+                        {% endif %}
+                    </dd>
+                    <dt>Created</dt>
+                    <dd>{{ content.created_at }}</dd>
+                    <dt>Updated</dt>
+                    <dd>{{ content.updated_at }}</dd>
+                </dl>
+            </div>
+        </div>
+
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header bg-white">
+                <h5 class="mb-0">Compliance</h5>
+            </div>
+            <div class="card-body">
+                {% if validation.is_compliant %}
+                <p class="text-success fw-bold">&#10003; Compliant</p>
+                {% else %}
+                <p class="text-danger fw-bold">&#10007; Issues Found</p>
+                <ul class="list-unstyled">
+                    {% for issue in validation.issues %}
+                    <li class="text-danger small">- {{ issue }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% if validation.suggestions %}
+                <p class="fw-bold mt-2">Suggestions:</p>
+                <ul class="list-unstyled">
+                    {% for s in validation.suggestions %}
+                    <li class="text-muted small">- {{ s }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white">
+                <h5 class="mb-0">Actions</h5>
+            </div>
+            <div class="card-body d-grid gap-2">
+                {% if content.status in ['draft', 'queued'] %}
+                <form method="POST" action="{{ url_for('approve_content', content_id=content.id) }}">
+                    <button type="submit" class="btn btn-success w-100">Approve</button>
+                </form>
+                <button type="button" class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#rejectModal">Reject</button>
+                {% endif %}
+                {% if content.status == 'approved' %}
+                <form method="POST" action="{{ url_for('publish_content', content_id=content.id) }}">
+                    <button type="submit" class="btn btn-primary w-100">Publish</button>
+                </form>
+                <form method="POST" action="{{ url_for('publish_content', content_id=content.id) }}">
+                    <input type="hidden" name="dry_run" value="1">
+                    <button type="submit" class="btn btn-outline-primary w-100">Dry Run</button>
+                </form>
+                {% endif %}
+                <a href="{{ url_for('review') }}" class="btn btn-outline-secondary w-100">Back to Queue</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Reject Modal -->
+<div class="modal fade" id="rejectModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="POST" action="{{ url_for('reject_content', content_id=content.id) }}">
+                <div class="modal-header">
+                    <h5 class="modal-title">Reject Content #{{ content.id }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <label for="reason" class="form-label">Reason (optional)</label>
+                    <textarea name="reason" id="reason" class="form-control" rows="3" placeholder="Why is this being rejected?"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-danger">Reject</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}{{ digest.title }} — RC Marketing Bot{% endblock %}
+
+{% block content %}
+<h1 class="mb-2">{{ digest.title or 'Digest' }}</h1>
+<p class="text-muted mb-4">{{ digest.scan_type }} scan &mdash; {{ digest.created_at }}</p>
+
+{% if digest.summary %}
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-body">
+        <h5>Summary</h5>
+        <div style="white-space: pre-wrap;">{{ digest.summary }}</div>
+    </div>
+</div>
+{% endif %}
+
+<div class="d-flex gap-2 mb-3">
+    <a href="{{ url_for('digest_detail', digest_id=digest.id) }}" class="btn btn-sm {{ 'btn-primary' if not platform_filter else 'btn-outline-primary' }}">All</a>
+    <a href="{{ url_for('digest_detail', digest_id=digest.id, platform='twitter') }}" class="btn btn-sm {{ 'btn-primary' if platform_filter == 'twitter' else 'btn-outline-primary' }}">Twitter</a>
+    <a href="{{ url_for('digest_detail', digest_id=digest.id, platform='linkedin') }}" class="btn btn-sm {{ 'btn-primary' if platform_filter == 'linkedin' else 'btn-outline-primary' }}">LinkedIn</a>
+</div>
+
+{% if items %}
+<div class="list-group">
+    {% for item in items %}
+    <div class="list-group-item">
+        <div class="d-flex justify-content-between align-items-start">
+            <div class="flex-grow-1 me-3">
+                <div class="mb-1">
+                    <span class="badge bg-secondary me-1">{{ item.platform }}</span>
+                    <strong>@{{ item.author or 'unknown' }}</strong>
+                    {% if item.topic_tags %}
+                    {% for tag in item.topic_tags.split(',') %}
+                    <span class="badge bg-light text-dark border ms-1">{{ tag.strip() }}</span>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+                <p class="mb-1">{{ item.body[:300] }}{{ '...' if item.body|length > 300 else '' }}</p>
+                <small class="text-muted">
+                    Engagement: {{ item.engagement_score }}
+                    {% if item.url %}
+                    &mdash; <a href="{{ item.url }}" target="_blank" rel="noopener">View original</a>
+                    {% endif %}
+                </small>
+            </div>
+            <div>
+                <form method="POST" action="{{ url_for('like_scanned', digest_id=digest.id, scanned_id=item.id) }}">
+                    <div class="input-group input-group-sm mb-1">
+                        <input type="text" name="notes" class="form-control" placeholder="Notes..." style="width: 120px;">
+                        <select name="liked_by" class="form-select" style="width: 90px;">
+                            <option value="michael">Michael</option>
+                            <option value="bradley">Bradley</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-sm btn-outline-danger w-100">&#9829; Like</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p class="text-muted">No scanned posts in this digest{{ ' for ' + platform_filter if platform_filter else '' }}.</p>
+{% endif %}
+
+<a href="{{ url_for('digest_list') }}" class="btn btn-outline-secondary mt-3">Back to Digests</a>
+{% endblock %}

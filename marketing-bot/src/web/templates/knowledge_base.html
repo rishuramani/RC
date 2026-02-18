@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% block title %}Knowledge Base — RC Marketing Bot{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Knowledge Base</h1>
+
+<ul class="nav nav-tabs mb-4" id="kbTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="facts-tab" data-bs-toggle="tab" data-bs-target="#facts" type="button" role="tab">Firm Facts</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="market-tab" data-bs-toggle="tab" data-bs-target="#market" type="button" role="tab">Market Data</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="sources-tab" data-bs-toggle="tab" data-bs-target="#sources" type="button" role="tab">Data Sources</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="rules-tab" data-bs-toggle="tab" data-bs-target="#rules" type="button" role="tab">Brand Rules</button>
+    </li>
+</ul>
+
+<div class="tab-content" id="kbTabContent">
+    <!-- Firm Facts -->
+    <div class="tab-pane fade show active" id="facts" role="tabpanel">
+        {% if firm_facts %}
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Key</th>
+                        <th>Value</th>
+                        <th>Source</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for fact in firm_facts %}
+                    <tr>
+                        <td><span class="badge bg-secondary">{{ fact.category }}</span></td>
+                        <td>{{ fact.key }}</td>
+                        <td>{{ fact.value }}</td>
+                        <td>{{ fact.source or '—' }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p class="text-muted">No firm facts loaded.</p>
+        {% endif %}
+    </div>
+
+    <!-- Market Data -->
+    <div class="tab-pane fade" id="market" role="tabpanel">
+        {% if market_data %}
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Market</th>
+                        <th>Metric</th>
+                        <th>Value</th>
+                        <th>Period</th>
+                        <th>Source</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for md in market_data %}
+                    <tr>
+                        <td><span class="badge bg-secondary">{{ md.market }}</span></td>
+                        <td>{{ md.metric }}</td>
+                        <td>{{ md.value }}</td>
+                        <td>{{ md.period or '—' }}</td>
+                        <td>{{ md.source or '—' }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p class="text-muted">No market data loaded.</p>
+        {% endif %}
+    </div>
+
+    <!-- Data Sources -->
+    <div class="tab-pane fade" id="sources" role="tabpanel">
+        {% if data_sources %}
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>URL</th>
+                        <th>Frequency</th>
+                        <th>Last Checked</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ds in data_sources %}
+                    <tr>
+                        <td>{{ ds.name }}</td>
+                        <td>{% if ds.url %}<a href="{{ ds.url }}" target="_blank">{{ ds.url }}</a>{% else %}—{% endif %}</td>
+                        <td>{{ ds.frequency or '—' }}</td>
+                        <td>{{ ds.last_checked or 'Never' }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p class="text-muted">No data sources configured.</p>
+        {% endif %}
+    </div>
+
+    <!-- Brand Rules -->
+    <div class="tab-pane fade" id="rules" role="tabpanel">
+        {% if brand_rules %}
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Rule Type</th>
+                        <th>Rule</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for rule in brand_rules %}
+                    <tr>
+                        <td><span class="badge bg-secondary">{{ rule.rule_type }}</span></td>
+                        <td>{{ rule.rule }}</td>
+                        <td>{{ rule.example or '—' }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p class="text-muted">No brand rules defined.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

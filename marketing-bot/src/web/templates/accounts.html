@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block title %}Monitored Accounts — RC Marketing Bot{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Monitored Accounts</h1>
+
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-header bg-white">
+        <h5 class="mb-0">Add Account</h5>
+    </div>
+    <div class="card-body">
+        <form method="POST" action="{{ url_for('add_account') }}">
+            <div class="row g-2">
+                <div class="col-md-2">
+                    <select name="platform" class="form-select">
+                        <option value="twitter">Twitter</option>
+                        <option value="linkedin">LinkedIn</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="handle" class="form-control" placeholder="@handle" required>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="name" class="form-control" placeholder="Display name (optional)">
+                </div>
+                <div class="col-md-2">
+                    <select name="category" class="form-select">
+                        <option value="">Category...</option>
+                        <option value="competitor">Competitor</option>
+                        <option value="analyst">Analyst</option>
+                        <option value="influencer">Influencer</option>
+                        <option value="media">Media</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">Add</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% if accounts %}
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Platform</th>
+                <th>Handle</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Active</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for a in accounts %}
+            <tr>
+                <td>{{ a.id }}</td>
+                <td><span class="badge bg-secondary">{{ a.platform }}</span></td>
+                <td><strong>@{{ a.handle }}</strong></td>
+                <td>{{ a.name or '—' }}</td>
+                <td>{{ a.category or '—' }}</td>
+                <td>
+                    {% if a.active %}
+                    <span class="text-success">Active</span>
+                    {% else %}
+                    <span class="text-muted">Inactive</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <form method="POST" action="{{ url_for('toggle_account', account_id=a.id) }}" class="d-inline">
+                        <button type="submit" class="btn btn-sm btn-outline-secondary">
+                            {{ 'Deactivate' if a.active else 'Activate' }}
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="text-center py-5">
+    <p class="text-muted fs-5">No monitored accounts yet.</p>
+    <p class="text-muted">Add accounts above to start scanning their content.</p>
+</div>
+{% endif %}
+{% endblock %}

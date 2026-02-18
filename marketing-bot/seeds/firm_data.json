@@ -1,0 +1,56 @@
+{
+  "track_record": {
+    "meta_street_value_increase": "43.4%",
+    "meta_street_hold_period": "18 months",
+    "meta_street_acquisition": "$1.325M",
+    "meta_street_sale": "$1.9M",
+    "avondale_annualized_return": "19.7%",
+    "marshall_target_irr": "~40%",
+    "moritz_year1_return": "9.3%"
+  },
+  "portfolio": {
+    "total_units": "143",
+    "total_properties": "5",
+    "houston_units": "128+",
+    "houston_properties": "4",
+    "phoenix_units": "15",
+    "phoenix_properties": "1",
+    "total_transaction_volume": "$20M+",
+    "properties": [
+      "101 Avondale St, Houston TX",
+      "414 Marshall St, Houston TX",
+      "1218 Jackson Blvd, Houston TX",
+      "1541 Moritz Dr, Houston TX (Oaks of Moritz)",
+      "3406 N 38th St, Phoenix AZ (Arcadia Lite)"
+    ]
+  },
+  "thesis": {
+    "target_irr": "18-25%",
+    "target_equity_multiple": "2.0x+",
+    "annual_cash_return": "7-9%",
+    "hold_period": "5-7 years",
+    "deal_size_range": "$5-20M",
+    "rental_range": "$1,100-$1,450/month",
+    "focus": "Workforce housing in Sunbelt markets",
+    "strategy": "Acquire, reposition, and manage multifamily properties",
+    "leverage_approach": "Conservative, low leverage, fixed-rate debt"
+  },
+  "advantage": {
+    "co_investment": "5-10% personal capital at risk alongside investors",
+    "deal_sourcing": "Proprietary broker relationships, off-market deals",
+    "market_knowledge": "Deep Houston/Phoenix submarket expertise",
+    "operational_excellence": "Proven playbook for workforce housing repositioning",
+    "conservative_approach": "Low leverage, stress-tested assumptions",
+    "boutique_execution": "Rapid decision-making, hands-on management"
+  },
+  "terms": {
+    "minimum_investment": "$100,000",
+    "target_equity_raise": "$1.5M-$2.5M per deal",
+    "acquisition_fee": "2.0% of purchase price",
+    "asset_management_fee": "2.0% of EGI annually",
+    "promote": "15-20% (deal dependent)",
+    "disposition_fee": "1.0% of sale price",
+    "refinance_fee": "0.5% of loan amount",
+    "distributions": "Quarterly"
+  }
+}
